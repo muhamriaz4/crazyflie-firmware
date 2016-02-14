@@ -580,15 +580,15 @@ static void distributePower(const uint16_t thrust, const int16_t roll,
 #ifdef QUAD_FORMATION_X
   int16_t r = roll >> 1;
   int16_t p = pitch >> 1;
-  motorPowerM1 = limitThrust(thrust - r + p + yaw);
-  motorPowerM2 = limitThrust(thrust - r - p - yaw);
-  motorPowerM3 =  limitThrust(thrust + r - p + yaw);
-  motorPowerM4 =  limitThrust(thrust + r + p - yaw);
+ // motorPowerM1 = limitThrust(thrust - r + p + yaw);
+ // motorPowerM2 = limitThrust(thrust - r - p - yaw);
+ // motorPowerM3 =  limitThrust(thrust + r - p + yaw);
+ // motorPowerM4 =  limitThrust(thrust + r + p - yaw);
 #else // QUAD_FORMATION_NORMAL
-  motorPowerM1 = limitThrust(thrust + pitch + yaw);
-  motorPowerM2 = limitThrust(thrust - roll - yaw);
-  motorPowerM3 =  limitThrust(thrust - pitch + yaw);
-  motorPowerM4 =  limitThrust(thrust + roll - yaw);
+ // motorPowerM1 = limitThrust(thrust + pitch + yaw);
+ // motorPowerM2 = limitThrust(thrust - roll - yaw);
+//  motorPowerM3 =  limitThrust(thrust - pitch + yaw);
+//  motorPowerM4 =  limitThrust(thrust + roll - yaw);
 #endif
 
   motorsSetRatio(MOTOR_M1, motorPowerM1);
@@ -735,3 +735,11 @@ PARAM_ADD(PARAM_FLOAT, Thresh, &autoTOThresh)
 PARAM_ADD(PARAM_FLOAT, Alpha, &autoTOAlpha)
 PARAM_GROUP_STOP(autoTO)
 #endif
+
+// Params for motor thrust
+PARAM_GROUP_START(motors)
+PARAM_ADD(PARAM_UINT32, motorPowerM1, &motorPowerM1)
+PARAM_ADD(PARAM_UINT32, motorPowerM2, &motorPowerM2)
+PARAM_ADD(PARAM_UINT32, motorPowerM3, &motorPowerM3)
+PARAM_ADD(PARAM_UINT32, motorPowerM4, &motorPowerM4)
+PARAM_GROUP_STOP(motors)
